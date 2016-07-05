@@ -19,6 +19,7 @@ import savings.repository.AccountRepository;
 import savings.repository.MerchantRepository;
 import savings.repository.NotFoundException;
 import savings.repository.PaybackRepository;
+import savings.service.PaybackBookKeeperImpl;
 
 //FIXME 0: remove @Ignore to use the test
 @Ignore
@@ -30,7 +31,7 @@ public class PaybackBookKeeperImplTest {
 
     PaybackRepository paybackRepository = mock(PaybackRepository.class);
 
-    // PaybackBookKeeperImpl bookKeeper =
+    PaybackBookKeeperImpl bookKeeper = new PaybackBookKeeperImpl(accountRepository, merchantRepository, paybackRepository);
 
     String creditCardNumber = "1234";
 
@@ -48,7 +49,7 @@ public class PaybackBookKeeperImplTest {
     public void shouldThrowWhenAccountNotFound() {
         when(accountRepository.findByCreditCard(creditCardNumber)).thenThrow(new NotFoundException());
 
-        //catchException(bookKeeper, NotFoundException.class).registerPaybackFor(...);
+        catchException(bookKeeper, NotFoundException.class).registerPaybackFor(purchase);
 
         assertThat(caughtException()).isNotNull();
     }
@@ -57,7 +58,7 @@ public class PaybackBookKeeperImplTest {
     public void shouldThrowWhenMerchantNotFound() {
         when(merchantRepository.findByNumber(merchantNumber)).thenThrow(new NotFoundException());
 
-        //catchException(bookKeeper, NotFoundException.class).registerPaybackFor(...);
+        catchException(bookKeeper, NotFoundException.class).registerPaybackFor(purchase);
 
         assertThat(caughtException()).isNotNull();
     }

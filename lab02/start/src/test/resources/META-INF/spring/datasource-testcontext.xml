@@ -9,5 +9,8 @@
          * dataLocation - classpath:/META-INF/sql/data.sql
         The scripts are accessible from this modules classpath.
     -->
-
+    <bean id="dataSource" class="common.sql.TestDataSourceFactory">
+        <constructor-arg index="0" value="classpath:/META-INF/sql/schema.sql"/>
+        <constructor-arg index="1" value="classpath:/META-INF/sql/data.sql"/>
+    </bean>
 </beans>

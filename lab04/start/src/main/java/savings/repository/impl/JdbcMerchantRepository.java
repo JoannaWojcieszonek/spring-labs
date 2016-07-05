@@ -17,6 +17,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 import common.math.Percentage;
 import savings.model.Merchant;
+import savings.model.PaybackPolicy;
 import savings.repository.MerchantRepository;
 
 public class JdbcMerchantRepository implements MerchantRepository {
@@ -71,8 +72,9 @@ public class JdbcMerchantRepository implements MerchantRepository {
         Merchant account = new Merchant(
                 resultSet.getString("NUMBER"),
                 resultSet.getString("NAME"),
-                new Percentage(resultSet.getBigDecimal("PAYBACK"))
-        );
+                new Percentage(resultSet.getBigDecimal("PAYBACK")),
+                PaybackPolices.valueOf(resultSet.getString("PAYBACK_POLICY"))
+                );
         account.setId(resultSet.getLong("ID"));
         return account;
     }
