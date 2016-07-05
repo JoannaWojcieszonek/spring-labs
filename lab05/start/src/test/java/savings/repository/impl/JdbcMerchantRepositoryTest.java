@@ -22,8 +22,7 @@ public class JdbcMerchantRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-        repository = new JdbcMerchantRepository();
-        repository.setDataSource(createDataSource());
+        repository = new JdbcMerchantRepository(createDataSource());
         repository.populateCache();
     }
 
