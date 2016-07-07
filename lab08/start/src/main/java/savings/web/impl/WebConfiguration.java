@@ -58,8 +58,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 
     // TODO #5 override one of base class methods to configure JSON message converter to automatically convert
     // JSON request body into entities and entities into JSON response body;
-
-
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(buildJsonMessageConverter());
