@@ -12,6 +12,7 @@ import static savings.PaybackFixture.creditCardNumber;
 import static savings.PaybackFixture.purchase;
 
 import org.joda.money.Money;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,7 @@ import savings.repository.PaybackRepository;
 import savings.repository.impl.RepositoryConfiguration;
 import savings.service.impl.ServiceConfiguration;
 
-@Ignore // FIXME
+//@Ignore // FIXME
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class PaybackBookKeeperTransactionTest {
@@ -54,6 +55,11 @@ public class PaybackBookKeeperTransactionTest {
 
     @Autowired
     PaybackBookKeeper bookKeeper;
+
+    @Before
+    public void setUp() {
+        paybackRepository = mock(PaybackRepository.class);
+    }
 
     @Test
     public void shouldRegisterPaybackInTransaction() throws Exception {
